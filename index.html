@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="rating" content="adult">
+<meta name="description" content="NEONVICE — 18+ adult entertainment. Members only.">
+<title>NEONVICE — 18+</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  /* 避免年龄门闪烁 */
+  if (localStorage.getItem("nv_age_ok") === "1") {
+    document.documentElement.classList.add("age-ok");
+  }
+</script>
+</head>
+<body>
+
+<!-- ============ AGE GATE ============ -->
+<div class="age-gate" id="ageGate">
+  <div class="age-gate-card">
+    <div class="age-logo">NEON<span>VICE</span></div>
+    <p class="age-warn">This site contains sexually explicit material intended for adults only.</p>
+    <ul class="age-list">
+      <li>You are at least 18 years old (or the age of majority in your jurisdiction).</li>
+      <li>You are not offended by adult content.</li>
+      <li>Viewing this material is legal where you live.</li>
+      <li>All performers depicted are 18 years or older.</li>
+    </ul>
+    <div class="age-actions">
+      <button class="btn-primary" id="ageEnter">I'm 18 or older — Enter</button>
+      <a class="btn-ghost" href="https://www.google.com">Leave</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="#/">NEON<span>VICE</span></a>
+
+    <nav class="nav" id="navCats" aria-label="Categories"></nav>
+
+    <form class="search" id="searchForm" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 18a8 8 0 1 1 5.3-2L21 21.7 19.7 23l-5.6-5.6A8 8 0 0 1 10 18Zm0-2a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"/></svg>
+      <input id="searchInput" type="search" placeholder="Search videos, performers, tags…" autocomplete="off" spellcheck="false">
+    </form>
+
+    <div class="header-right">
+      <a class="btn-ghost sm" href="#/category/trending">Trending</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MAIN ============ -->
+<main id="app" class="wrap"></main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-col">
+      <div class="logo sm">NEON<span>VICE</span></div>
+      <p class="muted small">All performers on this site are 18 years of age or older. All content is fiction or licensed. Records required by 18 U.S.C. § 2257 are maintained by the custodian of records.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Browse</h4>
+      <a href="#/category/new">New releases</a>
+      <a href="#/category/trending">Trending</a>
+      <a href="#/category/amateur">Amateur</a>
+      <a href="#/category/bdsm">BDSM</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#/">Terms of service</a>
+      <a href="#/">Privacy policy</a>
+      <a href="#/">DMCA</a>
+      <a href="#/">2257 statement</a>
+    </div>
+    <div class="footer-col">
+      <h4>18+ Only</h4>
+      <p class="muted small">This site is for adults. If you're under 18, leave now.</p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span class="muted small">© <span id="year"></span> NEONVICE. All rights reserved.</span>
+    <span class="muted small">Built as a static template — deploy anywhere.</span>
+  </div>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
