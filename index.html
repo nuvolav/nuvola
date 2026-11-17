@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f6f6f3" />
+  <meta name="description" content="一个记录想法、生活与灵感的个人博客。" />
+  <title>慢慢写 · 个人博客</title>
+  <style>
+    :root {
+      --bg: #f6f6f3; --surface: rgba(255,255,255,.72); --text: #20211f;
+      --muted: #858780; --line: rgba(32,33,31,.1); --accent: #7b8f78;
+      --shadow: 0 18px 55px rgba(28,34,26,.07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.7; overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background: radial-gradient(circle at 12% 8%, rgba(180,195,169,.24), transparent 32%),
+                  radial-gradient(circle at 88% 35%, rgba(215,207,190,.2), transparent 30%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1040px, calc(100% - 44px)); margin: auto; }
+    header {
+      height: 82px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { font-size: 18px; font-weight: 750; letter-spacing: -.7px; }
+    .brand span { color: var(--accent); }
+    nav { display: flex; gap: 28px; align-items: center; font-size: 13px; color: var(--muted); }
+    nav a { transition: color .25s; } nav a:hover { color: var(--text); }
+    .theme {
+      border: 1px solid var(--line); background: var(--surface); border-radius: 99px;
+      width: 36px; height: 36px; cursor: pointer; color: var(--text); font-size: 15px;
+      transition: transform .25s, background .25s;
+    }
+    .theme:hover { transform: rotate(18deg); }
+    .hero { padding: 112px 0 86px; position: relative; }
+    .eyebrow { color: var(--accent); font-size: 11px; font-weight: 750; letter-spacing: 2.5px; text-transform: uppercase; }
+    h1 { font-size: clamp(42px, 7vw, 76px); line-height: 1.12; letter-spacing: -3.5px; margin: 20px 0; font-weight: 720; }
+    h1 em { font-style: normal; color: var(--accent); }
+    .intro { color: var(--muted); max-width: 470px; font-size: 15px; }
+    .hero-bottom { display: flex; align-items: center; gap: 18px; margin-top: 34px; }
+    .pill {
+      background: var(--text); color: var(--bg); border-radius: 99px; padding: 11px 19px;
+      font-size: 12px; transition: transform .25s, box-shadow .25s;
+    }
+    .pill:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .subtle { color: var(--muted); font-size: 12px; }
+    .orb {
+      position: absolute; width: 190px; height: 190px; border-radius: 50%; right: 8%;
+      top: 105px; background: linear-gradient(135deg, rgba(178,195,166,.6), rgba(219,213,196,.16));
+      filter: blur(1px); animation: float 7s ease-in-out infinite;
+    }
+    .orb::after { content:""; position:absolute; inset:25px; border:1px solid rgba(255,255,255,.8); border-radius:50%; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; margin-bottom: 22px; }
+    h2 { font-size: 22px; letter-spacing: -.8px; margin: 0; }
+    .section-head p { color: var(--muted); font-size: 12px; margin: 0; }
+    .posts { display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .post {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+      padding: 25px; min-height: 205px; box-shadow: 0 5px 25px rgba(28,34,26,.025);
+      transition: transform .35s, box-shadow .35s, border-color .35s;
+      backdrop-filter: blur(12px);
+    }
+    .post:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: rgba(123,143,120,.35); }
+    .meta { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
+    .tag { color:var(--accent); }
+    .post h3 { font-size:19px; letter-spacing:-.5px; margin:22px 0 8px; }
+    .post p { font-size:13px; color:var(--muted); margin:0; }
+    .arrow { display:inline-block; margin-top:18px; font-size:12px; color:var(--accent); transition: transform .25s; }
+    .post:hover .arrow { transform: translateX(5px); }
+    .about {
+      margin: 90px 0 80px; padding: 34px; border:1px solid var(--line); border-radius:20px;
+      display:flex; justify-content:space-between; align-items:center; gap:30px;
+      background: linear-gradient(120deg, rgba(255,255,255,.55), rgba(233,237,226,.42));
+    }
+    .about p { max-width:510px; color:var(--muted); font-size:13px; margin:10px 0 0; }
+    .avatar {
+      width:70px; height:70px; flex:0 0 70px; border-radius:22px; display:grid; place-items:center;
+      background:#dce4d5; color:#61765f; font-size:25px; transform:rotate(-7deg);
+    }
+    footer { border-top:1px solid var(--line); padding:25px 0 35px; display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
+    .reveal { opacity:0; transform:translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.show { opacity:1; transform:translateY(0); }
+    @keyframes float { 0%,100% { transform:translateY(0) rotate(0); } 50% { transform:translateY(-17px) rotate(8deg); } }
+    body.dark {
+      --bg:#171916; --surface:rgba(36,40,34,.76); --text:#eef0e9; --muted:#a0a69a;
+      --line:rgba(238,240,233,.12); --accent:#a8bd9f; --shadow:0 18px 55px rgba(0,0,0,.2);
+    }
+    body.dark .about { background:linear-gradient(120deg,rgba(44,50,40,.7),rgba(34,39,32,.4)); }
+    body.dark .avatar { background:#354332; color:#c4d4bc; }
+    @media (max-width:650px) {
+      .wrap { width:min(100% - 34px, 520px); }
+      header { height:70px; } nav { gap:15px; } nav a { display:none; }
+      .hero { padding:88px 0 75px; } h1 { letter-spacing:-2.4px; }
+      .orb { width:115px; height:115px; right:0; top:80px; opacity:.7; }
+      .posts { grid-template-columns:1fr; }
+      .about { margin:65px 0; padding:24px; }
+      footer { gap:12px; flex-wrap:wrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#">慢慢写<span> .</span></a>
+      <nav aria-label="主导航">
+        <a href="#posts">文章</a><a href="#about">关于</a><a href="mailto:hello@example.com">联系</a>
+        <button class="theme" id="themeToggle" aria-label="切换主题" title="切换主题">☼</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="orb" aria-hidden="true"></div>
+        <div class="eyebrow reveal">A LITTLE SPACE OF MY OWN</div>
+        <h1 class="reveal">记录生活，<br>也记录<em>灵感。</em></h1>
+        <p class="intro reveal">你好，欢迎来到我的小小角落。这里放着一些日常思考、技术折腾，以及那些不想忘记的瞬间。</p>
+        <div class="hero-bottom reveal">
+          <a class="pill" href="#posts">浏览文章 ↗</a>
+          <span class="subtle">保持好奇，持续创造。</span>
+        </div>
+      </section>
+
+      <section id="posts" class="reveal">
+        <div class="section-head">
+          <div><div class="eyebrow">THE JOURNAL</div><h2>最近写作</h2></div>
+          <p>一些想法与片段 · 2026</p>
+        </div>
+        <div class="posts">
+          <a class="post" href="#" onclick="return false">
+            <div class="meta"><span>2026.11.17</span><span class="tag">随笔 / 01</span></div>
+            <h3>给生活留一点空白</h3>
+            <p>不必把每一分钟都安排好。偶尔停下来，灵感才有机会出现。</p>
+            <span class="arrow">阅读文章 ↗</span>
+          </a>
+          <a class="post" href="#" onclick="return false">
+            <div class="meta"><span>2026.11.08</span><span class="tag">技术 / 02</span></div>
+            <h3>从一个小项目开始</h3>
+            <p>把想法变成可以运行的东西，是一件很有成就感的事。</p>
+            <span class="arrow">阅读文章 ↗</span>
+          </a>
+          <a class="post" href="#" onclick="return false">
+            <div class="meta"><span>2026.10.26</span><span class="tag">生活 / 03</span></div>
+            <h3>收集平凡日子里的光</h3>
+            <p>一杯热茶、一段散步的路，都是值得认真记下来的小事。</p>
+            <span class="arrow">阅读文章 ↗</span>
+          </a>
+          <a class="post" href="#" onclick="return false">
+            <div class="meta"><span>2026.10.12</span><span class="tag">灵感 / 04</span></div>
+            <h3>保持简单，保持热爱</h3>
+            <p>删掉多余的装饰，让真正重要的内容自然地被看见。</p>
+            <span class="arrow">阅读文章 ↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="about reveal" id="about">
+        <div>
+          <div class="eyebrow">A NOTE ABOUT ME</div>
+          <h2>关于这个博客</h2>
+          <p>我是一个喜欢探索、记录和创造的人。这个网站用来存放我的文章、项目与生活片段。慢慢更新，不定期见。</p>
+        </div>
+        <div class="avatar" aria-hidden="true">✳</div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 慢慢写 · 用心记录</span>
+      <span>Designed with a little calm.　<a href="#top">回到顶部 ↑</a></span>
+    </footer>
+  </div>
+  <script>
+    // 滚动进入视口时淡入
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((el, index) => {
+      el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
+      observer.observe(el);
+    });
+
+    // 亮色 / 暗色主题切换
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggle.textContent = document.body.classList.contains('dark') ? '☾' : '☼';
+    });
+  </script>
+</body>
+</html>
